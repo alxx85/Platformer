@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField] private Coin _coinPrefab;
+    [SerializeField] private Coin _prefab;
     [SerializeField] private bool _spawnInTurn = true;
-    [SerializeField] private float _spawnDelay = 1f;
+    [SerializeField] private float _delay = 1f;
 
     private List<CoinSpawnPoint> _spawnPoints;
-    private WaitForSeconds _delay;
+    private WaitForSeconds _wait;
 
     private void Start()
     {
-        _delay = new WaitForSeconds(_spawnDelay);
+        _wait = new WaitForSeconds(_delay);
         _spawnPoints = new List<CoinSpawnPoint>(GetComponentsInChildren<CoinSpawnPoint>());
         StartCoroutine(Spawn());
 
@@ -23,11 +23,11 @@ public class CoinSpawner : MonoBehaviour
     {
         foreach (CoinSpawnPoint point in _spawnPoints)
         {
-            Coin newCoin = Instantiate(_coinPrefab, point.transform.position, Quaternion.identity, point.transform);
+            Coin newCoin = Instantiate(_prefab, point.transform.position, Quaternion.identity, point.transform);
             
             if (_spawnInTurn)
             {
-                yield return _delay;
+                yield return _wait;
             }
         }
 

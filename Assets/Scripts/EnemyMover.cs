@@ -17,12 +17,7 @@ public class EnemyMover : MonoBehaviour
         _endPoint = position;
     }
 
-    public void StartEnemyMove()
-    {
-        StartMoving();
-    }
-
-    private void StartMoving()
+    public void StartMoving()
     {
         float delay = Vector3.Distance(transform.position, _endPoint) / _speed;
         
